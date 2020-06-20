@@ -1,5 +1,6 @@
 using System.Net;
 using Cashback.WebApi.Models.Retailers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cashback.WebApi.Controllers
@@ -9,6 +10,7 @@ namespace Cashback.WebApi.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class RetailerController : ControllerBase
     {
         /// <summary>

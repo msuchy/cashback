@@ -1,10 +1,12 @@
 using Cashback.WebApi.Models.Reports;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cashback.WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class ReportController : ControllerBase
     {
         /// <summary>

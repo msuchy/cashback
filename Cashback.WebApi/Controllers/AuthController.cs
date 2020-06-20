@@ -1,4 +1,5 @@
 using Cashback.WebApi.Models.Auth;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cashback.WebApi.Controllers
@@ -18,6 +19,7 @@ namespace Cashback.WebApi.Controllers
         /// <response code="400"></response>
         [HttpPost]
         [Route("login")]
+        [AllowAnonymous]
         public IActionResult Post([FromBody]LoginApiModel request)
         {
             return Ok(new TokenApiModel());
