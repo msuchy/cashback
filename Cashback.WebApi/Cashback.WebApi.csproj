@@ -7,6 +7,8 @@
 
   <ItemGroup>
      <ProjectReference Include="..\Cashback.Application\Cashback.Application.csproj" />
+     <ProjectReference Include="..\Cashback.Repository\Cashback.Repository.csproj" />
+     <ProjectReference Include="..\Cashback.Domain\Cashback.Domain.csproj" />
    </ItemGroup>
 
   <ItemGroup>

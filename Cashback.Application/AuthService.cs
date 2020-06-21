@@ -1,17 +1,26 @@
 using System;
 using System.Security.Claims;
+using System.Threading.Tasks;
+using Cashback.Domain.Repositories;
+using Cashback.Domain.Services;
 
 namespace Cashback.Application
 {
     public class AuthService : IAuthService
     {
-        public AuthService()
+        private readonly IRetailerRepository _retailerRepository;
+        public AuthService(IRetailerRepository retailerRepository)
         {
+            _retailerRepository = retailerRepository;
         }
 
-        public bool Login(string username, string password)
+        public async Task<bool> Login(string username, string password)
         {
-            if (username == null) return false;
+            var retailer = await _retailerRepository.Find(username);
+            if (retailer == null ||
+                password != retailer.Password) 
+                return false;
+
             return true;
         }
     }

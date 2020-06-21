@@ -1,4 +1,6 @@
+using System.Threading.Tasks;
 using Cashback.Application;
+using Cashback.Domain.Services;
 using Cashback.WebApi.Models.Auth;
 using Cashback.WebApi.Util;
 using Microsoft.AspNetCore.Authorization;
@@ -27,9 +29,9 @@ namespace Cashback.WebApi.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public IActionResult Post([FromBody] LoginApiModel request, [FromServices] IAuthService authService, [FromServices] IJwtTokenService jwtTokenService)
+        public async Task<IActionResult> Post([FromBody] LoginApiModel request, [FromServices] IAuthService authService, [FromServices] IJwtTokenService jwtTokenService)
         {
-            if (authService.Login(request.CPF, request.Password))
+            if (await authService.Login(request.CPF, request.Password))
                 return Ok(new TokenApiModel { Token = jwtTokenService.CreateJwtToken(request.CPF) });
             else
                 return BadRequest("Authentication failure");

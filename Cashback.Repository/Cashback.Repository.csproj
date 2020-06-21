@@ -4,4 +4,12 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+
+<ItemGroup>
+     <ProjectReference Include="..\Cashback.Domain\Cashback.Domain.csproj" />
+   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.5" />
+  </ItemGroup>
+
 </Project>
