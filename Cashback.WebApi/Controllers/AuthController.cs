@@ -1,6 +1,12 @@
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using Cashback.WebApi.Models.Auth;
+using Cashback.WebApi.Options;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Cashback.WebApi.Controllers
 {
@@ -20,9 +26,22 @@ namespace Cashback.WebApi.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public IActionResult Post([FromBody]LoginApiModel request)
+        public IActionResult Post([FromBody]LoginApiModel request, [FromServices]IOptions<AuthenticationOptions> authOptions)
         {
-            return Ok(new TokenApiModel());
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = System.Text.Encoding.ASCII.GetBytes(authOptions.Value.IssuerSigningKey);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim("name", "teste")
+                }),
+                Expires = DateTime.UtcNow.AddHours(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return Ok(new TokenApiModel{ Token = tokenHandler.WriteToken(token)});
         }
     }
 }

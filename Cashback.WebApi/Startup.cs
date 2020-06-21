@@ -2,6 +2,8 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using Cashback.Application;
+using Cashback.WebApi.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -63,7 +65,7 @@ namespace Cashback.WebApi
                 
             });
 
-            var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("IssuerSigningKey"));
+            var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("Authentication:IssuerSigningKey"));
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -81,6 +83,10 @@ namespace Cashback.WebApi
                     ValidateAudience = false
                 };
             });
+
+            services.RegisterApplicationServices();
+
+            services.Configure<AuthenticationOptions>(Configuration.GetSection("Authentication"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -102,8 +108,8 @@ namespace Cashback.WebApi
 
             app.UseRouting();
 
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
