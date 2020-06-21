@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Text;
 using Cashback.Application;
 using Cashback.WebApi.Options;
+using Cashback.WebApi.Util;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -84,6 +85,7 @@ namespace Cashback.WebApi
                 };
             });
 
+            services.AddSingleton<IJwtTokenService, JwtTokenService>();
             services.RegisterApplicationServices();
 
             services.Configure<AuthenticationOptions>(Configuration.GetSection("Authentication"));
