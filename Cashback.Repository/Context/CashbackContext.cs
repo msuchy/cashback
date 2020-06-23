@@ -10,6 +10,7 @@ namespace Cashback.Repository.Context
         : base(options)
         { }
         public DbSet<RetailerDbModel> Retailers { get; set; }
+        public DbSet<OrderDbModel> Orders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,6 +25,11 @@ namespace Cashback.Repository.Context
                     PreApprovedOrders = true
                 }
             );
+
+            modelBuilder.Entity<OrderDbModel>()
+                .HasOne(x => x.Retailer)
+                .WithMany(x => x.Orders)
+                .HasForeignKey(x => x.RetailerId);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Cashback.Auth.Application
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim("name", name)
+                    new Claim(ClaimTypes.Name, name)
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)

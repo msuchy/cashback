@@ -15,3 +15,16 @@
     - Para até 1.000 reais em compras, o revendedor(a) receberá 10% de cashback do valor vendido no período de um ms;
     - Entre 1.000 e 1.500 reais em compras, o revendedor(a) receberá 15% de cashback do valor vendido no período de um mês;
     - Acima de 1.500 reais em compras, o revendedor(a) receberá 20% de cashback do valor vendido no período de um mês.
+
+
+{
+  "name": "string",
+  "cpf": "15350946056",
+  "email": "email@email.com",
+  "password": "string"
+}
+
+{
+  "cpf": "15350946056",
+  "password": "12345"
+}

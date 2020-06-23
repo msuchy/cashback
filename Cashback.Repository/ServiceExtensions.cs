@@ -13,6 +13,7 @@ namespace Cashback.Repository
         public static IServiceCollection RegisterRepositoryServices(this IServiceCollection services)
         {
             services.AddDbContext<CashbackContext>(opt => opt.UseInMemoryDatabase(databaseName: "Test"));
+            services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IRetailerRepository, RetailerRepository>();
             return services;
         }
