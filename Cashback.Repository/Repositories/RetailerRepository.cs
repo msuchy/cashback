@@ -1,3 +1,4 @@
+using Cashback.Domain.Common;
 using Cashback.Domain.Dtos.Retailers;
 using Cashback.Domain.Repositories;
 using Cashback.Domain.Retailers;
@@ -23,17 +24,19 @@ namespace Cashback.Repository.Repositories
                 .Add(new RetailerDbModel()
                 {
                     Id = Guid.NewGuid(),
-                    CPF = retailer.CPF,
+                    CPF = retailer.CPF.Value,
                     Name = retailer.Name,
                     Password = retailer.Password,
-                    Email = retailer.Email
+                    Email = retailer.Email.Address
                 });
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Retailer> Find(string cpf)
+        public async Task<Retailer> Find(Cpf cpf)
         {
-            var dbModel = await _context.Set<RetailerDbModel>().FirstOrDefaultAsync(r => r.CPF == cpf);
+            var dbModel = await _context.Set<RetailerDbModel>().FirstOrDefaultAsync(r => r.CPF == cpf.Value);
+            if (dbModel == null)
+                return null;
             return new Retailer(new CreateRetailerDto
             {
                 CPF = dbModel.CPF,
@@ -42,6 +45,5 @@ namespace Cashback.Repository.Repositories
                 Password = dbModel.Password
             });
         }
-
     }
 }

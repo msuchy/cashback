@@ -1,5 +1,4 @@
-﻿using System;
-using Cashback.Repository.Models;
+﻿using Cashback.Repository.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cashback.Repository.Context

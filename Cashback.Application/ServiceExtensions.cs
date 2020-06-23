@@ -1,4 +1,5 @@
 ﻿using Cashback.Application.Retailers;
+using Cashback.Domain.Common;
 using Cashback.Domain.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System.Diagnostics.CodeAnalysis;
@@ -11,6 +12,7 @@ namespace Cashback.Application
         public static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
         {
 
+            services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<IRetailerService, RetailerService>();
             return services;
         }

@@ -2,6 +2,7 @@ using Cashback.Domain.Dtos.Auth;
 using Cashback.Domain.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace Cashback.WebApi.Controllers
@@ -25,11 +26,19 @@ namespace Cashback.WebApi.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Post([FromBody] LoginDto request, [FromServices] IAuthService authService)
         {
-            var token = await authService.Login(request);
-            if (token == null)
-                return BadRequest("Authentication failure");
+            try
+            {
+                var token = await authService.Login(request);
+                if (token == null)
+                    return BadRequest("Authentication failure");
 
-            return Ok(token);
+                return Ok(token);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
     }
 }
