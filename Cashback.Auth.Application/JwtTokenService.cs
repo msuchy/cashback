@@ -1,11 +1,11 @@
+using Cashback.Auth.Application.Options;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Cashback.WebApi.Options;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 
-namespace Cashback.WebApi.Util
+namespace Cashback.Auth.Application
 {
     public class JwtTokenService : IJwtTokenService
     {

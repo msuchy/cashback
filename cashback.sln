@@ -1,17 +1,29 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cashback.Application", "Cashback.Application\Cashback.Application.csproj", "{93C32DDB-24D5-4862-BB6B-9B2053B38207}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cashback.Application", "Cashback.Application\Cashback.Application.csproj", "{93C32DDB-24D5-4862-BB6B-9B2053B38207}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cashback.Domain", "Cashback.Domain\Cashback.Domain.csproj", "{410523EC-46F3-4994-9D21-77F32526E822}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cashback.Domain", "Cashback.Domain\Cashback.Domain.csproj", "{410523EC-46F3-4994-9D21-77F32526E822}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cashback.Repository", "Cashback.Repository\Cashback.Repository.csproj", "{45F866DF-49DE-44F6-B9B0-0BAC95F389BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cashback.Repository", "Cashback.Repository\Cashback.Repository.csproj", "{45F866DF-49DE-44F6-B9B0-0BAC95F389BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cashback.WebApi", "Cashback.WebApi\Cashback.WebApi.csproj", "{BA4787B0-9C9D-454F-AFE1-25881C432FFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cashback.WebApi", "Cashback.WebApi\Cashback.WebApi.csproj", "{BA4787B0-9C9D-454F-AFE1-25881C432FFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cashback.UnitTest", "Cashback.UnitTest\Cashback.UnitTest.csproj", "{D35DD464-C469-4DD8-A2CA-4FD3A92174E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cashback.UnitTest", "Cashback.UnitTest\Cashback.UnitTest.csproj", "{D35DD464-C469-4DD8-A2CA-4FD3A92174E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{12BFA231-FB95-44ED-9470-B3E37B846B20}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{F37953DB-BBD1-47B8-A7BA-6383E870225D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{A87E6BC4-4155-4F31-A32A-CDD69A9BAE30}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{6982E60C-9539-47D8-BDC3-3C16FD3D246D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EF8D05C5-4A27-4CD8-9E1B-068C60E31582}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cashback.Auth.Application", "Cashback.Auth.Application\Cashback.Auth.Application.csproj", "{6A57ECB0-3C52-4123-9475-8BC4F2B1530D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +33,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{93C32DDB-24D5-4862-BB6B-9B2053B38207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -86,5 +95,31 @@ Global
 		{D35DD464-C469-4DD8-A2CA-4FD3A92174E2}.Release|x64.Build.0 = Release|Any CPU
 		{D35DD464-C469-4DD8-A2CA-4FD3A92174E2}.Release|x86.ActiveCfg = Release|Any CPU
 		{D35DD464-C469-4DD8-A2CA-4FD3A92174E2}.Release|x86.Build.0 = Release|Any CPU
+		{6A57ECB0-3C52-4123-9475-8BC4F2B1530D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A57ECB0-3C52-4123-9475-8BC4F2B1530D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A57ECB0-3C52-4123-9475-8BC4F2B1530D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6A57ECB0-3C52-4123-9475-8BC4F2B1530D}.Debug|x64.Build.0 = Debug|Any CPU
+		{6A57ECB0-3C52-4123-9475-8BC4F2B1530D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6A57ECB0-3C52-4123-9475-8BC4F2B1530D}.Debug|x86.Build.0 = Debug|Any CPU
+		{6A57ECB0-3C52-4123-9475-8BC4F2B1530D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A57ECB0-3C52-4123-9475-8BC4F2B1530D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A57ECB0-3C52-4123-9475-8BC4F2B1530D}.Release|x64.ActiveCfg = Release|Any CPU
+		{6A57ECB0-3C52-4123-9475-8BC4F2B1530D}.Release|x64.Build.0 = Release|Any CPU
+		{6A57ECB0-3C52-4123-9475-8BC4F2B1530D}.Release|x86.ActiveCfg = Release|Any CPU
+		{6A57ECB0-3C52-4123-9475-8BC4F2B1530D}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{93C32DDB-24D5-4862-BB6B-9B2053B38207} = {F37953DB-BBD1-47B8-A7BA-6383E870225D}
+		{410523EC-46F3-4994-9D21-77F32526E822} = {A87E6BC4-4155-4F31-A32A-CDD69A9BAE30}
+		{45F866DF-49DE-44F6-B9B0-0BAC95F389BF} = {6982E60C-9539-47D8-BDC3-3C16FD3D246D}
+		{BA4787B0-9C9D-454F-AFE1-25881C432FFE} = {12BFA231-FB95-44ED-9470-B3E37B846B20}
+		{D35DD464-C469-4DD8-A2CA-4FD3A92174E2} = {EF8D05C5-4A27-4CD8-9E1B-068C60E31582}
+		{6A57ECB0-3C52-4123-9475-8BC4F2B1530D} = {F37953DB-BBD1-47B8-A7BA-6383E870225D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {338E15D5-72F0-4BAF-AA64-16D9A22EBA62}
 	EndGlobalSection
 EndGlobal

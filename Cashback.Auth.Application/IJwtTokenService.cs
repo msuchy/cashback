@@ -1,4 +1,4 @@
-namespace Cashback.WebApi.Util
+namespace Cashback.Auth.Application
 {
     public interface IJwtTokenService
     {

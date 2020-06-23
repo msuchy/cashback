@@ -1,4 +1,4 @@
-namespace Cashback.WebApi.Options
+namespace Cashback.Auth.Application.Options
 {
     public class AuthenticationOptions
     {

@@ -1,11 +1,6 @@
-using System;
-using System.IO;
-using System.Reflection;
-using System.Text;
 using Cashback.Application;
+using Cashback.Auth.Application;
 using Cashback.Repository;
-using Cashback.WebApi.Options;
-using Cashback.WebApi.Util;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,6 +9,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System;
+using System.IO;
+using System.Reflection;
+using System.Text;
 
 namespace Cashback.WebApi
 {
@@ -86,11 +85,10 @@ namespace Cashback.WebApi
                 };
             });
 
-            services.AddSingleton<IJwtTokenService, JwtTokenService>();
             services.RegisterApplicationServices();
             services.RegisterRepositoryServices();
+            services.RegisterAuthApplicationServices(Configuration);
 
-            services.Configure<AuthenticationOptions>(Configuration.GetSection("Authentication"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

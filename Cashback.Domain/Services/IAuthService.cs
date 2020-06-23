@@ -5,6 +5,6 @@ namespace Cashback.Domain.Services
 {
     public interface IAuthService
     {
-        Task<bool> Login(LoginDto loginInfo);
+        Task<TokenDto> Login(LoginDto loginInfo);
     }
 }
