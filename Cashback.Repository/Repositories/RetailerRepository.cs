@@ -27,7 +27,8 @@ namespace Cashback.Repository.Repositories
                     CPF = retailer.CPF.Value,
                     Name = retailer.Name,
                     Password = retailer.Password,
-                    Email = retailer.Email.Address
+                    Email = retailer.Email.Address,
+                    PreApprovedOrders = retailer.PreApprovedOrders
                 });
             await _context.SaveChangesAsync();
         }
@@ -37,13 +38,14 @@ namespace Cashback.Repository.Repositories
             var dbModel = await _context.Set<RetailerDbModel>().FirstOrDefaultAsync(r => r.CPF == cpf.Value);
             if (dbModel == null)
                 return null;
+
             return new Retailer(new CreateRetailerDto
             {
                 CPF = dbModel.CPF,
                 Name = dbModel.Name,
                 Email = dbModel.Email,
-                Password = dbModel.Password
-            });
+                Password = dbModel.Password,
+            }, dbModel.PreApprovedOrders);
         }
     }
 }
