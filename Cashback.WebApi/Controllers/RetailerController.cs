@@ -10,8 +10,7 @@ namespace Cashback.WebApi.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
-    public class RetailerController : ControllerBase
+    public class RetailerController : CashbackBaseController
     {
         /// <summary>
         /// Rota para cadastrar um novo revendedor(a) exigindo no mínimo nome completo, CPF, e- mail e senha;

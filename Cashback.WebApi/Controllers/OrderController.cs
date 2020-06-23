@@ -10,8 +10,7 @@ namespace Cashback.WebApi.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
-    public class OrderController : ControllerBase
+    public class OrderController : CashbackBaseController
     {
 
         /// <summary>

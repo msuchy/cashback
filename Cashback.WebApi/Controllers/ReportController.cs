@@ -9,8 +9,7 @@ namespace Cashback.WebApi.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
-    public class ReportController : ControllerBase
+    public class ReportController : CashbackBaseController
     {
         /// <summary>
         /// Rota para exibir o acumulado de cashback até o momento,

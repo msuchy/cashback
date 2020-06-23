@@ -11,7 +11,7 @@ namespace Cashback.WebApi.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
-    public class AuthController : ControllerBase
+    public class AuthController : CashbackBaseController
     {
         /// <summary>
         /// Rota para validar um login de um revendedor(a);
