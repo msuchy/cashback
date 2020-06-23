@@ -3,6 +3,7 @@ using Cashback.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Cashback.WebApi.Controllers
 {
@@ -22,11 +23,12 @@ namespace Cashback.WebApi.Controllers
         /// <response code="200"></response>
         /// <response code="400"></response>
         [HttpPost]
-        public IActionResult Post([FromBody]CreateOrderDto request, [FromServices]IOrderService orderService)
+        public async Task<IActionResult> Post([FromBody]CreateOrderDto request, [FromServices]IOrderService orderService)
         {
             try
             {
-                return Ok(orderService.Create(request, User.Identity.Name));
+                await orderService.Create(request, User.Identity.Name);
+                return Ok();
             }
             catch (ArgumentException ex)
             {
@@ -41,9 +43,10 @@ namespace Cashback.WebApi.Controllers
         /// <response code="200"></response>
         [HttpGet]
         [Route("list")]
-        public IActionResult Get()
+        public async Task<IActionResult> Get([FromServices]IOrderService orderService)
         {
-            return Ok(new List<OrderDetailsDto>());
+            var list = await orderService.List(User.Identity.Name);
+            return Ok(list);
         }
 
     }

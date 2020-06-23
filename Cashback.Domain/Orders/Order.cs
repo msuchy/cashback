@@ -19,5 +19,14 @@ namespace Cashback.Domain.Orders
             Retailer = retailer;
             Status = retailer.PreApprovedOrders ? OrderStatus.Approved : OrderStatus.Validating;
         }
+
+        public Order(string code, decimal value, DateTime referenceDate, Retailer retailer, OrderStatus status)
+        {
+            Code = code;
+            Value = value;
+            ReferenceDate = referenceDate;
+            Retailer = retailer;
+            Status = status;
+        }
     }
 }

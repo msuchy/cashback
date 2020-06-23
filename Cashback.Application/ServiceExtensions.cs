@@ -13,6 +13,7 @@ namespace Cashback.Application
         public static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
         {
 
+            services.AddScoped<ICashbackService, CashbackService>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<IRetailerService, RetailerService>();

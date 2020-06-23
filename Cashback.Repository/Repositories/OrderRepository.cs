@@ -1,8 +1,13 @@
+using Cashback.Domain.Common;
+using Cashback.Domain.Dtos.Retailers;
 using Cashback.Domain.Orders;
 using Cashback.Domain.Repositories;
+using Cashback.Domain.Retailers;
 using Cashback.Repository.Context;
 using Cashback.Repository.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Cashback.Repository.Repositories
@@ -27,6 +32,26 @@ namespace Cashback.Repository.Repositories
                     ReferenceDate = order.ReferenceDate
                 });
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<Order>> FindByRetailer(Cpf cpf)
+        {
+            return await _context.Set<OrderDbModel>().Where(r => r.Retailer.CPF == cpf.Value)
+                .Select(o => new Order(
+                
+                    o.Code,
+                    o.Value,
+                    o.ReferenceDate,
+                    new Retailer(new CreateRetailerDto
+                    {
+                        CPF = o.Retailer.CPF,
+                        Name = o.Retailer.Name,
+                        Email = o.Retailer.Email,
+                        Password = o.Retailer.Password,
+                    }, o.Retailer.PreApprovedOrders),
+                    o.Status
+                ))
+                .ToListAsync();
         }
     }
 }

@@ -1,3 +1,4 @@
+using Cashback.Domain.Orders;
 using Cashback.Domain.Retailers;
 using System;
 
@@ -11,5 +12,6 @@ namespace Cashback.Repository.Models
         public RetailerDbModel Retailer { get; set; }
         public decimal Value { get; set; }
         public DateTime ReferenceDate { get; set; }
+        public OrderStatus Status { get; set; }
     }
 }
