@@ -1,8 +1,11 @@
-using System.Threading.Tasks;
+using Cashback.Domain.Dtos.Retailers;
 using Cashback.Domain.Repositories;
+using Cashback.Domain.Retailers;
 using Cashback.Domain.Services;
+using System.Threading.Tasks;
 
-namespace Cashback.Application.Retailers{
+namespace Cashback.Application.Retailers
+{
     public class RetailerService : IRetailerService
     {
         private readonly IRetailerRepository _retailerRepository;
@@ -10,9 +13,9 @@ namespace Cashback.Application.Retailers{
         {
             _retailerRepository = retailerRepository;
         }
-        public async Task Create(string cpf, string name, string email, string password)
+        public async Task Create(CreateRetailerDto retailerInfo)
         {
-            await _retailerRepository.Add(new Domain.Retailers.Retailer(cpf, name, email, password));
+            await _retailerRepository.Add(new Retailer(retailerInfo));
         }
     }
 }

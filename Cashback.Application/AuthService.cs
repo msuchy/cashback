@@ -1,8 +1,7 @@
-using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
+using Cashback.Domain.Dtos.Auth;
 using Cashback.Domain.Repositories;
 using Cashback.Domain.Services;
+using System.Threading.Tasks;
 
 namespace Cashback.Application
 {
@@ -14,11 +13,11 @@ namespace Cashback.Application
             _retailerRepository = retailerRepository;
         }
 
-        public async Task<bool> Login(string username, string password)
+        public async Task<bool> Login(LoginDto loginInfo)
         {
-            var retailer = await _retailerRepository.Find(username);
+            var retailer = await _retailerRepository.Find(loginInfo.CPF);
             if (retailer == null ||
-                password != retailer.Password) 
+                loginInfo.Password != retailer.Password) 
                 return false;
 
             return true;

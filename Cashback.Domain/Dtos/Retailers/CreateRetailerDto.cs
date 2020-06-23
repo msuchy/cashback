@@ -1,6 +1,6 @@
-namespace Cashback.WebApi.Models.Retailers
+namespace Cashback.Domain.Dtos.Retailers
 {
-    public class CreateRetailerApiModel{
+    public class CreateRetailerDto{
         public string Name { get; set; }
         public string CPF { get; set; }
         public string Email { get; set; }

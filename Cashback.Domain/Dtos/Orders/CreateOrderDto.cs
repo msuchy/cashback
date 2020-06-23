@@ -1,8 +1,8 @@
 using System;
 
-namespace Cashback.WebApi.Models.Orders
+namespace Cashback.Domain.Dtos.Orders
 {
-    public class CreateOrderApiModel{
+    public class CreateOrderDto{
         public Guid Id { get; set; }
         public decimal Value { get; set; }
         public DateTime CreatedOn { get; set; } 

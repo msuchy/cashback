@@ -1,9 +1,12 @@
-using Cashback.WebApi.Models.Reports;
+using Cashback.Domain.Dtos.Reports;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cashback.WebApi.Controllers
 {
+    /// <summary>
+    /// Relatórios
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     [Authorize]
@@ -17,7 +20,7 @@ namespace Cashback.WebApi.Controllers
         [Route("cashback/balance")]
         public IActionResult Get()
         {
-            return Ok(new BalanceApiModel());
+            return Ok(new BalanceDto());
         }
 
     }

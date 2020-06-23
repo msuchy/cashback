@@ -1,6 +1,5 @@
-using System.Net;
+using Cashback.Domain.Dtos.Retailers;
 using Cashback.Domain.Services;
-using Cashback.WebApi.Models.Retailers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,9 +22,9 @@ namespace Cashback.WebApi.Controllers
         /// <response code="400">Erro de validação dos dados enviados</response>
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult Post([FromBody]CreateRetailerApiModel request, [FromServices]IRetailerService retailerService)
+        public IActionResult Post([FromBody]CreateRetailerDto request, [FromServices]IRetailerService retailerService)
         {
-            retailerService.Create(request.CPF, request.Name, request.Email, request.Password);
+            retailerService.Create(request);
             return Ok();
         }
     }

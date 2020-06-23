@@ -1,10 +1,13 @@
-using System.Collections.Generic;
-using Cashback.WebApi.Models.Orders;
+using Cashback.Domain.Dtos.Orders;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace Cashback.WebApi.Controllers
 {
+    /// <summary>
+    /// Compras
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     [Authorize]
@@ -12,19 +15,19 @@ namespace Cashback.WebApi.Controllers
     {
 
         /// <summary>
-        /// Rota para cadastrar uma nova compra exigindo no mínimo código, valor, data e CPF do revendedor(a). Todos os cadastros são salvos com o status “Em validação” exceto quando o CPF do revendedor(a) for 153.509.460-56, neste caso o status é salvo como “Aprovado”;
+        /// Rota para cadastrar uma nova compra
         /// </summary>
         /// <param name="request"></param>
         /// <response code="200"></response>
         /// <response code="400"></response>
         [HttpPost]
-        public IActionResult Post([FromBody]CreateOrderApiModel request)
+        public IActionResult Post([FromBody]CreateOrderDto request)
         {
             return Ok();
         }
 
         /// <summary>
-        /// Rota para listar as compras cadastradas retornando código, valor, data, % de cashback aplicado para esta compra, valor de cashback para esta compra e status;
+        /// Rota para listar as compras cadastradas
         /// </summary>
         /// <response code="200"></response>
 
@@ -32,7 +35,7 @@ namespace Cashback.WebApi.Controllers
         [Route("list")]
         public IActionResult Get()
         {
-            return Ok(new List<OrderDetailsApiModel>());
+            return Ok(new List<OrderDetailsDto>());
         }
 
     }

@@ -1,10 +1,10 @@
-using System;
+using Cashback.Domain.Dtos.Auth;
 using System.Threading.Tasks;
 
 namespace Cashback.Domain.Services
 {
     public interface IAuthService
     {
-        Task<bool> Login(string username, string password);
+        Task<bool> Login(LoginDto loginInfo);
     }
 }

@@ -1,4 +1,7 @@
-namespace Cashback.Domain.Retailers{
+using Cashback.Domain.Dtos.Retailers;
+
+namespace Cashback.Domain.Retailers
+{
 
     public class Retailer{
         public string CPF { get; private set; }
@@ -6,11 +9,11 @@ namespace Cashback.Domain.Retailers{
         public string Email { get; private set; }
         public string Password { get; private set; }
 
-        public Retailer (string cpf, string name, string email, string password){
-            CPF = cpf;
-            Name = name;
-            Email = email;
-            Password = password;
+        public Retailer (CreateRetailerDto retailerInfo){
+            CPF = retailerInfo.CPF;
+            Name = retailerInfo.Name;
+            Email = retailerInfo.Email;
+            Password = retailerInfo.Password;
         }
     }
 }

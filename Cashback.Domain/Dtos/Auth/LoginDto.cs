@@ -1,8 +1,7 @@
-using System;
-
-namespace Cashback.WebApi.Models.Auth
+namespace Cashback.Domain.Dtos.Auth
 {
-    public class LoginApiModel{
+    public class LoginDto
+    {
         public string CPF { get; set; }
         public string Password { get; set; }
     }

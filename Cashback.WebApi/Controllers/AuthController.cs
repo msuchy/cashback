@@ -1,23 +1,19 @@
-using System.Threading.Tasks;
-using Cashback.Application;
+using Cashback.Domain.Dtos.Auth;
 using Cashback.Domain.Services;
-using Cashback.WebApi.Models.Auth;
 using Cashback.WebApi.Util;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Cashback.WebApi.Controllers
 {
     /// <summary>
-    /// Login
+    /// Autenticação
     /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class AuthController : ControllerBase
     {
-        public AuthController()
-        {
-        }
         /// <summary>
         /// Rota para validar um login de um revendedor(a);
         /// </summary>
@@ -29,14 +25,12 @@ namespace Cashback.WebApi.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public async Task<IActionResult> Post([FromBody] LoginApiModel request, [FromServices] IAuthService authService, [FromServices] IJwtTokenService jwtTokenService)
+        public async Task<IActionResult> Post([FromBody] LoginDto request, [FromServices] IAuthService authService, [FromServices] IJwtTokenService jwtTokenService)
         {
-            if (await authService.Login(request.CPF, request.Password))
-                return Ok(new TokenApiModel { Token = jwtTokenService.CreateJwtToken(request.CPF) });
+            if (await authService.Login(request))
+                return Ok(new TokenDto { Token = jwtTokenService.CreateJwtToken(request.CPF) });
             else
                 return BadRequest("Authentication failure");
         }
-
-
     }
 }
