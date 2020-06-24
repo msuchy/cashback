@@ -41,7 +41,7 @@ namespace Cashback.Application.Orders
             if (retailer == null)
                 throw new ArgumentException("Retailer not found");
 
-            var orders = await _orderRepository.FindByRetailer(cpf);
+            var orders = await _orderRepository.FindCurrentMonthByRetailer(cpf);
 
             var currentTotalAmount = orders.Sum(o => o.Value);
             var currentCashbackPercent = _cashbackService.GetPercentByTotalAmount(currentTotalAmount);

@@ -1,5 +1,4 @@
 using Cashback.Domain.Orders;
-using Cashback.Domain.Retailers;
 using System;
 
 namespace Cashback.Repository.Models

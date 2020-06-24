@@ -9,6 +9,6 @@ namespace Cashback.Domain.Repositories
     {
         Task Add(Order order);
 
-        Task<IEnumerable<Order>> FindByRetailer(Cpf cpf);
+        Task<IEnumerable<Order>> FindCurrentMonthByRetailer(Cpf cpf);
     }
 }

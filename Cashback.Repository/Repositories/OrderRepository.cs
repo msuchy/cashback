@@ -6,6 +6,7 @@ using Cashback.Domain.Retailers;
 using Cashback.Repository.Context;
 using Cashback.Repository.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,9 +36,10 @@ namespace Cashback.Repository.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Order>> FindByRetailer(Cpf cpf)
+        public async Task<IEnumerable<Order>> FindCurrentMonthByRetailer(Cpf cpf)
         {
-            return await _context.Set<OrderDbModel>().Where(r => r.Retailer.CPF == cpf.Value)
+            var currentMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 0);
+            return await _context.Set<OrderDbModel>().Where(r => r.Retailer.CPF == cpf.Value && r.ReferenceDate >= currentMonth)
                 .Select(o => new Order(
                 
                     o.Code,
