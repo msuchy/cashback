@@ -34,14 +34,16 @@ namespace Cashback.Application.Orders
             await _orderRepository.Add(order);
         }
 
-        public async Task<IEnumerable<OrderDetailsDto>> List(string retailerCpf)
+        public async Task<IEnumerable<OrderDetailsDto>> ListCurrentMonth(string retailerCpf)
         {
             var cpf = new Cpf(retailerCpf);
             var retailer = await _retailerRepository.Find(cpf);
             if (retailer == null)
                 throw new ArgumentException("Retailer not found");
 
-            var orders = await _orderRepository.FindCurrentMonthByRetailer(cpf);
+            var currentMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 0);
+
+            var orders = await _orderRepository.FindOrdersByRetailerAndPeriod(cpf, currentMonth, DateTime.Now);
 
             var currentTotalAmount = orders.Sum(o => o.Value);
             var currentCashbackPercent = _cashbackService.GetPercentByTotalAmount(currentTotalAmount);

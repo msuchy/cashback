@@ -7,6 +7,6 @@ namespace Cashback.Domain.Services
     public interface IOrderService
     {
         Task Create(CreateOrderDto orderInfo, string retailerCpf);
-        Task<IEnumerable<OrderDetailsDto>> List(string retailerCpf);
+        Task<IEnumerable<OrderDetailsDto>> ListCurrentMonth(string retailerCpf);
     }
 }

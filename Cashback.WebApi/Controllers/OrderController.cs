@@ -42,10 +42,10 @@ namespace Cashback.WebApi.Controllers
         /// </summary>
         /// <response code="200"></response>
         [HttpGet]
-        [Route("list")]
+        [Route("list/period/month/current")]
         public async Task<IActionResult> Get([FromServices]IOrderService orderService)
         {
-            var list = await orderService.List(User.Identity.Name);
+            var list = await orderService.ListCurrentMonth(User.Identity.Name);
             return Ok(list);
         }
 

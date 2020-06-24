@@ -36,10 +36,9 @@ namespace Cashback.Repository.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Order>> FindCurrentMonthByRetailer(Cpf cpf)
+        public async Task<IEnumerable<Order>> FindOrdersByRetailerAndPeriod(Cpf cpf, DateTime initial, DateTime final)
         {
-            var currentMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 0);
-            return await _context.Set<OrderDbModel>().Where(r => r.Retailer.CPF == cpf.Value && r.ReferenceDate >= currentMonth)
+            return await _context.Set<OrderDbModel>().Where(r => r.Retailer.CPF == cpf.Value && r.ReferenceDate >= initial && r.ReferenceDate < final)
                 .Select(o => new Order(
                 
                     o.Code,
