@@ -13,6 +13,7 @@ using Xunit;
 
 namespace Cashback.UnitTest.Services
 {
+    [Trait("Order Tests", "service")]
     public class OrderServiceTests
     {
         [Fact]
@@ -23,6 +24,8 @@ namespace Cashback.UnitTest.Services
              .Options;
 
             var retailerCpf = new Cpf("408.477.340-99");
+            var orderReferenceDate = DateTime.Now;
+
 
             using (var context = new CashbackContext(options))
             {
@@ -42,9 +45,9 @@ namespace Cashback.UnitTest.Services
 
                 var orderRepository = new OrderRepository(context);
 
-                await orderRepository.Add(new Domain.Orders.Order("ABC", 20, DateTime.Now.AddMonths(-5), retailer));
-                await orderRepository.Add(new Domain.Orders.Order("DEF", 30, DateTime.Now, retailer));
-                await orderRepository.Add(new Domain.Orders.Order("GHI", 40, DateTime.Now.AddMonths(5), retailer));
+                await orderRepository.Add(new Order("ABC", 20, orderReferenceDate.AddMonths(-5), retailer));
+                await orderRepository.Add(new Order("DEF", 30, orderReferenceDate, retailer));
+                await orderRepository.Add(new Order("GHI", 40, orderReferenceDate.AddMonths(5), retailer));
             }
             using (var context = new CashbackContext(options))
             {
@@ -63,6 +66,7 @@ namespace Cashback.UnitTest.Services
                 Assert.Equal("DEF", orders.First().Code);
                 Assert.Equal(30, orders.First().Value);
                 Assert.Equal(OrderStatus.Validating, orders.First().Status);
+                Assert.Equal(orderReferenceDate, orders.First().ReferenceDate);
                 Assert.Equal(10, orders.First().CashbackPercent);
                 Assert.Equal(3, orders.First().CashbackValue);
             }
@@ -77,6 +81,8 @@ namespace Cashback.UnitTest.Services
              .Options;
 
             var retailerCpf = new Cpf("408.477.340-99");
+            var orderReferenceDate = DateTime.Now;
+
 
             using (var context = new CashbackContext(options))
             {
@@ -100,7 +106,7 @@ namespace Cashback.UnitTest.Services
 
                 await orderService.Create(new Domain.Dtos.Orders.CreateOrderDto() {
                     Code = "ABC",
-                    ReferenceDate = DateTime.Now,
+                    ReferenceDate = orderReferenceDate,
                     Value = 200
                 }, retailerCpf.Value);
 
@@ -112,6 +118,7 @@ namespace Cashback.UnitTest.Services
                 Assert.Single(orders);
                 Assert.Equal("ABC", orders.First().Code);
                 Assert.Equal(200, orders.First().Value);
+                Assert.Equal(orderReferenceDate, orders.First().ReferenceDate);
                 Assert.Equal(OrderStatus.Validating, orders.First().Status);
             }
         }
