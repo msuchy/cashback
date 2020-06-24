@@ -41,13 +41,13 @@ namespace Cashback.Application.Orders
             if (retailer == null)
                 throw new ArgumentException("Retailer not found");
 
-            var currentMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 0);
+            var currentMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
 
             var orders = await _orderRepository.FindOrdersByRetailerAndPeriod(cpf, currentMonth, DateTime.Now);
 
             var currentTotalAmount = orders.Sum(o => o.Value);
             var currentCashbackPercent = _cashbackService.GetPercentByTotalAmount(currentTotalAmount);
-            var intCashback = (int)currentCashbackPercent * 100;
+            var intCashback = (int)(currentCashbackPercent * 100);
 
             return orders.Select(o => new OrderDetailsDto()
             {

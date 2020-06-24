@@ -10,6 +10,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
     <PackageReference Include="xunit" Version="2.4.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
@@ -22,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Cashback.Application\Cashback.Application.csproj" />
     <ProjectReference Include="..\Cashback.Domain\Cashback.Domain.csproj" />
+    <ProjectReference Include="..\Cashback.Repository\Cashback.Repository.csproj" />
   </ItemGroup>
 
 </Project>
