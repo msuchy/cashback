@@ -4,7 +4,7 @@ using Xunit;
 namespace Cashback.UnitTest.Services
 {
     [Trait("Cashback Tests", "service")]
-    public class CashbackServiceTest
+    public class CashbackServiceTests
     {
         [Theory]
         [InlineData(0,0.1)]
