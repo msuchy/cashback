@@ -1,6 +1,7 @@
-using Cashback.Domain.Dtos.Reports;
-using Microsoft.AspNetCore.Authorization;
+using Cashback.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Cashback.WebApi.Controllers
 {
@@ -17,9 +18,17 @@ namespace Cashback.WebApi.Controllers
         /// <response code="200"></response>
         [HttpGet]
         [Route("cashback/balance")]
-        public IActionResult Get()
+        public async Task<IActionResult> Get([FromServices]IBalanceReportService reportService)
         {
-            return Ok(new BalanceDto());
+            try
+            {
+                var balance = await reportService.GetRetailerBalance(User.Identity.Name);
+                return Ok(balance);
+            }
+            catch (HttpRequestException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
     }

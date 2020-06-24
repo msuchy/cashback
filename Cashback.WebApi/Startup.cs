@@ -1,5 +1,6 @@
 using Cashback.Application;
 using Cashback.Auth.Application;
+using Cashback.ExternalServices;
 using Cashback.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -88,6 +89,7 @@ namespace Cashback.WebApi
             services.RegisterApplicationServices();
             services.RegisterRepositoryServices();
             services.RegisterAuthApplicationServices(Configuration);
+            services.RegisterExternalServices(Configuration);
 
         }
 

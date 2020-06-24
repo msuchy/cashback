@@ -29,7 +29,8 @@ namespace Cashback.Repository.Repositories
                     Code = order.Code,
                     RetailerId = retailer.Id,
                     Value = order.Value,
-                    ReferenceDate = order.ReferenceDate
+                    ReferenceDate = order.ReferenceDate,
+                    Status = order.Status
                 });
             await _context.SaveChangesAsync();
         }

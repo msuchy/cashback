@@ -1,4 +1,5 @@
 ﻿using Cashback.Application.Orders;
+using Cashback.Application.Reports;
 using Cashback.Application.Retailers;
 using Cashback.Domain.Common;
 using Cashback.Domain.Services;
@@ -17,6 +18,7 @@ namespace Cashback.Application
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<IRetailerService, RetailerService>();
+            services.AddScoped<IBalanceReportService, BalanceReportService>();
             return services;
         }
     }
