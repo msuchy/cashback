@@ -122,5 +122,57 @@ namespace Cashback.UnitTest.Services
                 Assert.Equal(OrderStatus.Validating, orders.First().Status);
             }
         }
+
+        [Fact]
+        public async Task Create_Order_With_Approoved_Status_Success()
+        {
+            var options = new DbContextOptionsBuilder<CashbackContext>()
+             .UseInMemoryDatabase(databaseName: $"Teste_OrderService{Guid.NewGuid()}")
+             .Options;
+
+            var retailerCpf = new Cpf("15350946056");
+            var orderReferenceDate = DateTime.Now;
+
+
+            using (var context = new CashbackContext(options))
+            {
+                context.Database.EnsureCreated();
+
+                var retailerRepository = new RetailerRepository(context);
+
+                await retailerRepository.Add(new Domain.Retailers.Retailer(new Domain.Dtos.Retailers.CreateRetailerDto()
+                {
+                    CPF = retailerCpf.Value,
+                    Name = "Test name",
+                    Email = "naotem@naotem.com",
+                    Password = "bla"
+                }));
+
+                var orderRepository = new OrderRepository(context);
+
+                var orderService = new OrderService(
+                    retailerRepository,
+                    orderRepository,
+                    new CashbackService());
+
+                await orderService.Create(new Domain.Dtos.Orders.CreateOrderDto()
+                {
+                    Code = "ABC",
+                    ReferenceDate = orderReferenceDate,
+                    Value = 200
+                }, retailerCpf.Value);
+
+            }
+            using (var context = new CashbackContext(options))
+            {
+                var orders = await context.Set<OrderDbModel>().ToListAsync();
+
+                Assert.Single(orders);
+                Assert.Equal("ABC", orders.First().Code);
+                Assert.Equal(200, orders.First().Value);
+                Assert.Equal(orderReferenceDate, orders.First().ReferenceDate);
+                Assert.Equal(OrderStatus.Approved, orders.First().Status);
+            }
+        }
     }
 }
