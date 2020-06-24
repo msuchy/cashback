@@ -30,7 +30,14 @@ namespace Cashback.UnitTest.Services
             var options = GetOptions();
             var endPoints = new List<(string, object, HttpStatusCode)>
             {
-                ($"{options.Value.BalanceApiUrl}{options.Value.BalanceEndpoint}", new BalanceDtoResponse(){ StatusCode = 200, Body = new BalanceDtoResponse.BalanceDtoModel(){Credit=200} }, HttpStatusCode.OK)
+                ($"{options.Value.BalanceApiUrl}{options.Value.BalanceEndpoint}",
+                    new BalanceDtoResponse(){
+                        StatusCode = 200,
+                        Body = new BalanceDtoResponse.BalanceDtoModel(){
+                            Credit=200
+                        }
+                    },
+                    HttpStatusCode.OK)
             };
             var httpClientFactoryMock = GetFakeHttpClientFactoryMockEndPoints(options.Value.BalanceApiUrl, endPoints);
 
@@ -49,7 +56,6 @@ namespace Cashback.UnitTest.Services
             }
 
         }
-
 
         [Fact]
         public async Task Get_Balance_Amount_Fail_On_External_Service_Fail()
@@ -74,9 +80,7 @@ namespace Cashback.UnitTest.Services
 
                 await Assert.ThrowsAsync<HttpRequestException>(() => balanceReportService.GetRetailerBalance("15350946056"));
             }
-
         }
-
 
         [Fact]
         public async Task Get_Balance_Amount_Fail_On_Retailer_Not_Found()
@@ -101,7 +105,6 @@ namespace Cashback.UnitTest.Services
 
                 await Assert.ThrowsAsync<ArgumentException>(() => balanceReportService.GetRetailerBalance("408.477.340-99"));
             }
-
         }
 
         public Mock<IHttpClientFactory> GetFakeHttpClientFactoryMockEndPoints(string baseUrl, IEnumerable<(string url, object payload, HttpStatusCode status)> endpoints)
