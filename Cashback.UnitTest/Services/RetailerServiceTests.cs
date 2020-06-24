@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Cashback.UnitTest.Services
 {
+    [Trait("Retailer Tests", "service")]
     public class RetailerServiceTests
     {
         [Fact]
@@ -110,7 +111,6 @@ namespace Cashback.UnitTest.Services
 
             using (var context = new CashbackContext(options))
             {
-
                 var retailerRepository = new RetailerRepository(context);
 
                 var retailerService = new RetailerService(retailerRepository, passwordHasher);
