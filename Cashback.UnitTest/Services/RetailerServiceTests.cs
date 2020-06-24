@@ -5,6 +5,8 @@ using Cashback.Repository.Context;
 using Cashback.Repository.Models;
 using Cashback.Repository.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Moq;
 using System;
 using System.Threading.Tasks;
 using Xunit;
@@ -30,7 +32,7 @@ namespace Cashback.UnitTest.Services
 
                 var retailerRepository = new RetailerRepository(context);
 
-                var retailerService = new RetailerService(retailerRepository, passwordHasher);
+                var retailerService = new RetailerService(retailerRepository, passwordHasher, new Mock<ILogger<RetailerService>>().Object);
 
                 await retailerService.Create(new Domain.Dtos.Retailers.CreateRetailerDto()
                 {
@@ -69,7 +71,7 @@ namespace Cashback.UnitTest.Services
 
                 var retailerRepository = new RetailerRepository(context);
 
-                var retailerService = new RetailerService(retailerRepository, passwordHasher);
+                var retailerService = new RetailerService(retailerRepository, passwordHasher, new Mock<ILogger<RetailerService>>().Object);
 
                 await retailerService.Create(new Domain.Dtos.Retailers.CreateRetailerDto()
                 {
@@ -113,7 +115,7 @@ namespace Cashback.UnitTest.Services
             {
                 var retailerRepository = new RetailerRepository(context);
 
-                var retailerService = new RetailerService(retailerRepository, passwordHasher);
+                var retailerService = new RetailerService(retailerRepository, passwordHasher, new Mock<ILogger<RetailerService>>().Object);
 
                 await Assert.ThrowsAnyAsync<ArgumentException>(() => retailerService.Create(new Domain.Dtos.Retailers.CreateRetailerDto()
                 {

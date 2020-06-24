@@ -6,6 +6,8 @@ using Cashback.Repository.Context;
 using Cashback.Repository.Models;
 using Cashback.Repository.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Moq;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -58,7 +60,8 @@ namespace Cashback.UnitTest.Services
                 var orderService = new OrderService(
                     retailerRepository,
                     orderRepository,
-                    new CashbackService());
+                    new CashbackService(),
+                    new Mock<ILogger<OrderService>>().Object);
 
                 var orders = await orderService.ListCurrentMonth(retailerCpf.Value);
 
@@ -102,7 +105,8 @@ namespace Cashback.UnitTest.Services
                 var orderService = new OrderService(
                     retailerRepository,
                     orderRepository,
-                    new CashbackService());
+                    new CashbackService(),
+                    new Mock<ILogger<OrderService>>().Object);
 
                 await orderService.Create(new Domain.Dtos.Orders.CreateOrderDto() {
                     Code = "ABC",
@@ -153,7 +157,8 @@ namespace Cashback.UnitTest.Services
                 var orderService = new OrderService(
                     retailerRepository,
                     orderRepository,
-                    new CashbackService());
+                    new CashbackService(),
+                    new Mock<ILogger<OrderService>>().Object);
 
                 await orderService.Create(new Domain.Dtos.Orders.CreateOrderDto()
                 {

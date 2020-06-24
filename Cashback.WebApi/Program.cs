@@ -9,6 +9,8 @@ namespace Cashback.WebApi
     {
         public static void Main(string[] args)
         {
+
+
             var host = CreateHostBuilder(args).Build();
 
             // Roda as migrations do EF

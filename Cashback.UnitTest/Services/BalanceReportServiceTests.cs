@@ -5,6 +5,7 @@ using Cashback.ExternalServices.Options;
 using Cashback.Repository.Context;
 using Cashback.Repository.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
 using Newtonsoft.Json;
@@ -47,7 +48,7 @@ namespace Cashback.UnitTest.Services
                 var retailerRepository = new RetailerRepository(context);
 
                 var balanceService = new BalanceService(options, httpClientFactoryMock.Object);
-                var balanceReportService = new BalanceReportService(retailerRepository, balanceService);
+                var balanceReportService = new BalanceReportService(retailerRepository, balanceService, new Mock<ILogger<BalanceReportService>>().Object);
 
                 var balance = await balanceReportService.GetRetailerBalance("15350946056");
 
@@ -76,7 +77,7 @@ namespace Cashback.UnitTest.Services
                 var retailerRepository = new RetailerRepository(context);
 
                 var balanceService = new BalanceService(options, httpClientFactoryMock.Object);
-                var balanceReportService = new BalanceReportService(retailerRepository, balanceService);
+                var balanceReportService = new BalanceReportService(retailerRepository, balanceService, new Mock<ILogger<BalanceReportService>>().Object);
 
                 await Assert.ThrowsAsync<HttpRequestException>(() => balanceReportService.GetRetailerBalance("15350946056"));
             }
@@ -101,7 +102,7 @@ namespace Cashback.UnitTest.Services
                 var retailerRepository = new RetailerRepository(context);
 
                 var balanceService = new BalanceService(options, httpClientFactoryMock.Object);
-                var balanceReportService = new BalanceReportService(retailerRepository, balanceService);
+                var balanceReportService = new BalanceReportService(retailerRepository, balanceService, new Mock<ILogger<BalanceReportService>>().Object);
 
                 await Assert.ThrowsAsync<ArgumentException>(() => balanceReportService.GetRetailerBalance("408.477.340-99"));
             }

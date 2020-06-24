@@ -8,8 +8,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
+using Serilog.Events;
 using System;
 using System.IO;
 using System.Reflection;
@@ -22,6 +25,14 @@ namespace Cashback.WebApi
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+
+            Log.Logger = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .WriteTo.ColoredConsole(
+                     LogEventLevel.Verbose,
+                     "{NewLine}{Timestamp:HH:mm:ss} [{Level}] ({CorrelationToken}) {Message}{NewLine}{Exception}")
+                .CreateLogger();
         }
 
         public IConfiguration Configuration { get; }
@@ -94,9 +105,9 @@ namespace Cashback.WebApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-
+            loggerFactory.AddSerilog();
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>
