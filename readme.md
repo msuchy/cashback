@@ -17,14 +17,7 @@
     - Acima de 1.500 reais em compras, o revendedor(a) receberá 20% de cashback do valor vendido no período de um mês.
 
 
-{
-  "name": "string",
-  "cpf": "15350946056",
-  "email": "email@email.com",
-  "password": "string"
-}
-
-{
-  "cpf": "15350946056",
-  "password": "12345"
-}
+## Starting user
+Cpf 153.509.460-56 seeded in database
+- ``` user: 15350946056 ```
+- ``` password: 12345 ```
