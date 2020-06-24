@@ -24,5 +24,7 @@ Cpf 153.509.460-56 seeded in database
 
 
 ## Considerações futuras
+- Uso de base SQL
+  - Esta proposta utiliza o EF Core in Memory apenas para efeitos de execução rápida
 - Uso de AutoMapper
 - Uso de Identity server para autenticação e autorização
